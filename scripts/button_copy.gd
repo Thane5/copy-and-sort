@@ -1,23 +1,43 @@
 extends Button
 
-var sourceFileArray
+var sourceFileArray = []
 var copiedFilesArray = []
 
 
 var continueCopying = false
-var fileNumber
+var fileNumber = 0
 
 # Called when the node enters the scene tree for the first time.
 func _process(delta):
+	%"Copy Button".disabled = continueCopying
+	
 	if continueCopying:
-		sourceFileArray[0].name
-		continueCopying = false
-		pass # Replace with function body.
+		var currentFile = sourceFileArray[fileNumber]
+		
+		# here is say "fileNumber+1" because the displayed counter should start at 1
+		print("processing file " + str(fileNumber+1) + " of " + str(sourceFileArray.size()))
+		
+		# Copy the selected file
+		_copy_file_to_target(currentFile)
+		
+		
+		
+		if fileNumber+1 == sourceFileArray.size():
+			#print("All files copied")
+			continueCopying = false
+			fileNumber = 0
+			copiedFilesArray = []
+		else:
+			#print("not all files processed, continuing")
+			continueCopying = true
+			fileNumber = fileNumber+1
 
 
 
 
 func _on_pressed():
+	%LogArea.clear()
+	
 	var sourceExists = DirAccess.dir_exists_absolute(%"Path Manager".sourceFolderPath)
 	var targetExists = DirAccess.dir_exists_absolute(%"Path Manager".targetFolderPath)
 	
@@ -30,12 +50,9 @@ func _on_pressed():
 	if sourceExists and targetExists:
 		sourceFileArray = DirAccess.get_files_at(%"Path Manager".sourceFolderPath)
 		
+		continueCopying = true
 
-		for file in sourceFileArray:
-			_copy_file(file)
-			
-
-func _copy_file(file):
+func _copy_file_to_target(file):
 	var sourceFilePath = %"Path Manager".sourceFolderPath + "/" + file
 			
 	# Construct the string for the Year/month subfolders
@@ -50,7 +67,7 @@ func _copy_file(file):
 	
 	# Only copy proceed if the file doesnt already exist
 	if FileAccess.file_exists(targetFilePath):
-		print("This file already exists and will be skipped: " + targetFilePath)
+		print("This file already exists at target and will be skipped: " + targetFilePath)
 	else:
 		# Check if the folder structure exists
 		if !DirAccess.dir_exists_absolute(targetFolderPath + folderStructure):
