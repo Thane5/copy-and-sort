@@ -7,6 +7,8 @@ var copiedFilesArray = []
 var continueCopying = false
 var fileNumber = 0
 
+var logMessage
+
 # Called when the node enters the scene tree for the first time.
 func _process(delta):
 	%"Copy Button".disabled = continueCopying
@@ -32,6 +34,7 @@ func _process(delta):
 			continueCopying = false
 			fileNumber = 0
 			copiedFilesArray = []
+			%LogArea.text = logMessage
 		else:
 			#print("not all files processed, continuing")
 			continueCopying = true
@@ -84,5 +87,12 @@ func _copy_file_to_target(file):
 		DirAccess.copy_absolute(sourceFilePath, targetFilePath)
 		copiedFilesArray.append(file)
 		
+		
+	var filesAnalysed = str(sourceFileArray.size())
+	var skippedFiles = str(sourceFileArray.size() - copiedFilesArray.size())
+	var copiedFiles = str(copiedFilesArray.size())
+	
+	logMessage = filesAnalysed + " files found on source. " + skippedFiles + " of them already exist on target. " + copiedFiles + " files copied: " + str(copiedFilesArray)
+	print(logMessage)
 	# Set log text
-	%LogArea.text = str(copiedFilesArray.size()) + " Files copied: " + str(copiedFilesArray)
+	#%LogArea.text = logMessage
