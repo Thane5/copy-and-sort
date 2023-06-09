@@ -62,6 +62,7 @@ layout_mode = 2
 disabled = true
 
 [node name="Set Source" type="Button" parent="MarginContainer/VBoxContainer/Path Manager/Source"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -90,6 +91,7 @@ layout_mode = 2
 disabled = true
 
 [node name="Set Target" type="Button" parent="MarginContainer/VBoxContainer/Path Manager/Target"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 focus_mode = 0

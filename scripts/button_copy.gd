@@ -10,12 +10,17 @@ var fileNumber = 0
 # Called when the node enters the scene tree for the first time.
 func _process(delta):
 	%"Copy Button".disabled = continueCopying
+	%"Set Source".disabled = continueCopying
+	%"Set Target".disabled = continueCopying
 	
 	if continueCopying:
 		var currentFile = sourceFileArray[fileNumber]
 		
 		# here is say "fileNumber+1" because the displayed counter should start at 1
-		print("processing file " + str(fileNumber+1) + " of " + str(sourceFileArray.size()))
+		var statusText = "Processing file " + str(fileNumber+1) + " of " + str(sourceFileArray.size())
+		print(statusText)
+
+		%"Copy Button".text = statusText
 		
 		# Copy the selected file
 		_copy_file_to_target(currentFile)
@@ -31,7 +36,8 @@ func _process(delta):
 			#print("not all files processed, continuing")
 			continueCopying = true
 			fileNumber = fileNumber+1
-
+	else:
+		%"Copy Button".text = "Copy"
 
 
 
