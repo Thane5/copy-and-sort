@@ -1,0 +1,148 @@
+[gd_scene load_steps=5 format=3 uid="uid://px11gl1o6qd8"]
+
+[ext_resource type="Script" path="res://scripts/path_manager.gd" id="1_oasco"]
+[ext_resource type="StyleBox" uid="uid://ciqwsvmt6kib0" path="res://theming/Label_Path.tres" id="2_ewv3b"]
+[ext_resource type="Script" path="res://scripts/button_copy.gd" id="3_n386t"]
+[ext_resource type="Script" path="res://scripts/settings_manager.gd" id="4_mite4"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Path Manager" type="VBoxContainer" parent="MarginContainer/VBoxContainer" node_paths=PackedStringArray("sourceFileDialog", "targetFileDialog")]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("1_oasco")
+sourceFileDialog = NodePath("../../../SourceFileDialog")
+targetFileDialog = NodePath("../../../TargetFileDialog")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Path Manager"]
+visible = false
+layout_mode = 2
+text = "Path Configuration"
+
+[node name="Source" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Path Manager"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Path Manager/Source"]
+layout_mode = 2
+text = "Source:"
+
+[node name="SourcePathDisplay" type="Label" parent="MarginContainer/VBoxContainer/Path Manager/Source"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = ExtResource("2_ewv3b")
+text = "-"
+text_overrun_behavior = 3
+
+[node name="SourcePathCheck" type="CheckBox" parent="MarginContainer/VBoxContainer/Path Manager/Source"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+disabled = true
+
+[node name="Set Source" type="Button" parent="MarginContainer/VBoxContainer/Path Manager/Source"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+text = "Select Folder..."
+
+[node name="Target" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Path Manager"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Path Manager/Target"]
+layout_mode = 2
+text = "Target: "
+
+[node name="TargetPathDisplay" type="Label" parent="MarginContainer/VBoxContainer/Path Manager/Target"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = ExtResource("2_ewv3b")
+text = "-"
+text_overrun_behavior = 3
+
+[node name="TargetPathCheck" type="CheckBox" parent="MarginContainer/VBoxContainer/Path Manager/Target"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+disabled = true
+
+[node name="Set Target" type="Button" parent="MarginContainer/VBoxContainer/Path Manager/Target"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+focus_mode = 0
+text = "Select Folder..."
+
+[node name="Spacer2" type="Panel" parent="MarginContainer/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Copy Button" type="Button" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+disabled = true
+text = "Copy Files"
+script = ExtResource("3_n386t")
+
+[node name="Spacer" type="Panel" parent="MarginContainer/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Log:"
+
+[node name="LogArea" type="TextEdit" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+wrap_mode = 1
+
+[node name="SourceFileDialog" type="NativeFileDialog" parent="."]
+title = "Select Source Folder"
+mode_overrides_title = false
+file_mode = 2
+access = 2
+
+[node name="TargetFileDialog" type="NativeFileDialog" parent="."]
+title = "Select Target Folder"
+mode_overrides_title = false
+file_mode = 2
+access = 2
+
+[node name="SettingsManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("4_mite4")
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Path Manager/Source/Set Source" to="MarginContainer/VBoxContainer/Path Manager" method="_on_set_source_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Path Manager/Target/Set Target" to="MarginContainer/VBoxContainer/Path Manager" method="_on_set_target_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Copy Button" to="MarginContainer/VBoxContainer/Copy Button" method="_on_pressed"]
+[connection signal="dir_selected" from="SourceFileDialog" to="MarginContainer/VBoxContainer/Path Manager" method="_on_open_source_folder_dir_selected"]
+[connection signal="dir_selected" from="TargetFileDialog" to="MarginContainer/VBoxContainer/Path Manager" method="_on_open_target_folder_dir_selected"]
