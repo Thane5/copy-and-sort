@@ -51,10 +51,15 @@ func _on_pressed():
 	var targetExists = DirAccess.dir_exists_absolute(%"Path Manager".targetFolderPath)
 	
 	if !sourceExists:
-		print("Error with source folder:" + %"Path Manager".sourceFolderPath)
+		
+		logMessage = "Error - Source folder not found: " + %"Path Manager".sourceFolderPath
+		print(logMessage)
+		%LogArea.text = logMessage
 		
 	if !targetExists:
-		print("Error with target folder:" + %"Path Manager".targetFolderPath)
+		logMessage = "Error - Target folder not found: " + %"Path Manager".targetFolderPath
+		print(logMessage)
+		%LogArea.text = logMessage
 	
 	if sourceExists and targetExists:
 		sourceFileArray = DirAccess.get_files_at(%"Path Manager".sourceFolderPath)
