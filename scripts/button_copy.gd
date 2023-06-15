@@ -93,11 +93,11 @@ func _copy_file_to_target(file):
 		copiedFilesArray.append(file)
 		
 		
-	var filesAnalysed = str(sourceFileArray.size())
-	var skippedFiles = str(sourceFileArray.size() - copiedFilesArray.size())
-	var copiedFiles = str(copiedFilesArray.size())
+	var filesAnalysedCount = str(sourceFileArray.size())
+	var skippedFilesCount = str(sourceFileArray.size() - copiedFilesArray.size())
+	var copiedFilesCount = str(copiedFilesArray.size())
 	
-	logMessage = filesAnalysed + " files found on source. " + skippedFiles + " of them already exist on target. " + copiedFiles + " files copied: " + str(copiedFilesArray)
+	logMessage = filesAnalysedCount + " files found on source. " + skippedFilesCount + " of them already exist on target. " + copiedFilesCount + " files copied: " + str(copiedFilesArray)
 	print(logMessage)
 	# Set log text
 	#%LogArea.text = logMessage
