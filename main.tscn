@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://px11gl1o6qd8"]
+[gd_scene load_steps=6 format=3 uid="uid://px11gl1o6qd8"]
 
 [ext_resource type="Script" path="res://scripts/path_manager.gd" id="1_oasco"]
 [ext_resource type="StyleBox" uid="uid://ciqwsvmt6kib0" path="res://theming/Label_Path.tres" id="2_ewv3b"]
+[ext_resource type="Theme" uid="uid://0hyyrsabbwqq" path="res://theming/Blue Button.tres" id="3_04cjg"]
 [ext_resource type="Script" path="res://scripts/button_copy.gd" id="3_n386t"]
 [ext_resource type="Script" path="res://scripts/settings_manager.gd" id="4_mite4"]
 
@@ -108,6 +109,7 @@ custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 focus_mode = 0
+theme = ExtResource("3_04cjg")
 disabled = true
 text = "Copy Files"
 script = ExtResource("3_n386t")
