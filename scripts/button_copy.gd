@@ -40,7 +40,7 @@ func _process(delta):
 			continueCopying = true
 			fileNumber = fileNumber+1
 	else:
-		%"Copy Button".text = "Copy"
+		%"Copy Button".text = "Copy Files"
 
 
 
