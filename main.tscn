@@ -32,8 +32,8 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 script = ExtResource("1_oasco")
-sourceFileDialog = NodePath("../../../SourceFileDialog")
-targetFileDialog = NodePath("../../../TargetFileDialog")
+sourceFileDialog = NodePath("../../../FileDialog Source")
+targetFileDialog = NodePath("../../../FileDialog Target")
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Path Manager"]
 visible = false
@@ -127,17 +127,23 @@ layout_mode = 2
 size_flags_vertical = 3
 wrap_mode = 1
 
-[node name="SourceFileDialog" type="NativeFileDialog" parent="."]
-title = "Select Source Folder"
-mode_overrides_title = false
+[node name="FileDialog Source" type="FileDialog" parent="."]
+title = "Open a Directory"
+initial_position = 2
+size = Vector2i(454, 159)
+ok_button_text = "Select Current Folder"
 file_mode = 2
 access = 2
+use_native_dialog = true
 
-[node name="TargetFileDialog" type="NativeFileDialog" parent="."]
-title = "Select Target Folder"
-mode_overrides_title = false
+[node name="FileDialog Target" type="FileDialog" parent="."]
+title = "Open a Directory"
+initial_position = 2
+size = Vector2i(454, 159)
+ok_button_text = "Select Current Folder"
 file_mode = 2
 access = 2
+use_native_dialog = true
 
 [node name="SettingsManager" type="Node" parent="."]
 unique_name_in_owner = true
@@ -146,5 +152,5 @@ script = ExtResource("4_mite4")
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Path Manager/Source/Set Source" to="MarginContainer/VBoxContainer/Path Manager" method="_on_set_source_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Path Manager/Target/Set Target" to="MarginContainer/VBoxContainer/Path Manager" method="_on_set_target_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Copy Button" to="MarginContainer/VBoxContainer/Copy Button" method="_on_pressed"]
-[connection signal="dir_selected" from="SourceFileDialog" to="MarginContainer/VBoxContainer/Path Manager" method="_on_open_source_folder_dir_selected"]
-[connection signal="dir_selected" from="TargetFileDialog" to="MarginContainer/VBoxContainer/Path Manager" method="_on_open_target_folder_dir_selected"]
+[connection signal="dir_selected" from="FileDialog Source" to="MarginContainer/VBoxContainer/Path Manager" method="_on_file_dialog_source_dir_selected"]
+[connection signal="dir_selected" from="FileDialog Target" to="MarginContainer/VBoxContainer/Path Manager" method="_on_file_dialog_target_dir_selected"]

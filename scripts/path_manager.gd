@@ -2,8 +2,8 @@ extends VBoxContainer
 
 var sourceFolderPath = "nullstring"
 var targetFolderPath = "nullstring"
-@export var sourceFileDialog: NativeFileDialog
-@export var targetFileDialog: NativeFileDialog
+@export var sourceFileDialog: FileDialog
+@export var targetFileDialog: FileDialog
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,7 +17,7 @@ func _on_set_target_pressed():
 	targetFileDialog.show()
 
 
-func _on_open_source_folder_dir_selected(dir):
+func _on_file_dialog_source_dir_selected(dir):
 	sourceFolderPath = dir
 	print("Source folder: " + sourceFolderPath)
 	%SourcePathDisplay.text = sourceFolderPath
@@ -29,7 +29,7 @@ func _on_open_source_folder_dir_selected(dir):
 	%SettingsManager.save_settings()
 
 
-func _on_open_target_folder_dir_selected(dir):
+func _on_file_dialog_target_dir_selected(dir):
 	targetFolderPath = dir
 	print("Target folder: " + targetFolderPath)
 	%TargetPathDisplay.text = targetFolderPath
