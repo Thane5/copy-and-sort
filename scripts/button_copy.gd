@@ -10,7 +10,7 @@ var fileNumber = 0
 var logMessage
 
 # Called when the node enters the scene tree for the first time.
-func _process(delta):
+func _process(_delta):
 	%"Copy Button".disabled = continueCopying
 	%"Set Source".disabled = continueCopying
 	%"Set Target".disabled = continueCopying

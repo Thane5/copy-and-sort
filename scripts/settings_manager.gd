@@ -31,10 +31,6 @@ func _ready():
 	%"Path Manager".update_copy_button()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
 func save_settings():
 	settingsFile = FileAccess.open(settingsPath, FileAccess.WRITE)
 #	print("trying to save " + %"Path Manager".sourceFolderPath)
