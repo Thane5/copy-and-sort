@@ -1,4 +1,4 @@
-# Copy And Sort
+# Copy and Sort
 ![Image](Camera_Icon.png)
 
 Godot-based GUI application to copy files from one directory (or storage medium) to another, while also sorting them by date on the target location
